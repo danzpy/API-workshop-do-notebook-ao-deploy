@@ -21,5 +21,5 @@ build-backend = "poetry.core.masonry.api"
 [tool.taskipy.tasks]
 
 run = "uvicorn main:app --reload"
-test = "pytest -v"
+test = "pytest -v tests.py"
 kill = "kill -9 $(lsof -t i:8000)"
