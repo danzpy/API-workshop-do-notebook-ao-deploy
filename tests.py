@@ -14,11 +14,11 @@ def test_response():
     response = client.get('/')
     assert response.json() == {"Seja": "Bem-vindo"}
  
-def listar_produtos_status_code():
+def test_listar_produtos_status_code():
     response = client.get('/produtos')
     assert response.status_code == 200
 
 
-def listar_produtos_response():
+def test_listar_produtos_response():
     response = client.get('/produtos')
     assert response.json() == produtos
