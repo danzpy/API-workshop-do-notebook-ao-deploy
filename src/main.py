@@ -1,8 +1,10 @@
+from .data import Produtos
 from fastapi import FastAPI
-from typing import List, Dict
+from .schema import ProdutosSchema
 
-# Criando a instância
+# Criando instâncias
 app = FastAPI()
+lista_produtos = Produtos()
 
 #Criando rotas
 
@@ -10,38 +12,18 @@ app = FastAPI()
 def bem_vindo(): # Response
     return {'Seja': 'Bem-vindo'}
 
-produtos: List[Dict[str, any]] = [
-    {
-        'id': 1,
-        'nome': 'iPhone 14',
-        'descricao': 'Apple iPhone 14 128GB Meia-Noite 5G Tela 6,1" Câm. Traseira 12+12MP Frontal 12MP',
-        'preco': 4699.00,
-    },
 
-    {
-        'id': 2,
-        'nome': 'ThinkPad L14',
-        'descricao': 'Notebook ThinkPad L14 (14” Intel)',
-        'preco': 3328.00,
-    },
-
-    {
-        'id': 3,
-        'nome': 'iPad 10.9',
-        'descricao': 'Apple iPad 10.9" 10ª Geração, Wi-Fi, 256GB, Prateado',
-        'preco': 4699.00,
-    }
-]
-
-@app.get('/produtos') # Request
+@app.get('/produtos', response_model=list[ProdutosSchema]) # Request
 def listar_produtos():
-    return produtos
+    return lista_produtos.listar_produtos()
 
 
-@app.get('/produtos/{id}')
-
+@app.get('/produtos/{id}', response_model=ProdutosSchema)
 def seleciona_produto(id: int):
-    for produto in produtos:
-        if produto['id'] == id:
-            return produto
-    return {'Status': 404, 'Mensagem': 'Produto não encontrado'}
+    return lista_produtos.buscar_produto(id)
+
+
+
+@app.post('/produtos', response_model=ProdutosSchema)
+def adicionar_produto(produto: ProdutosSchema):
+    return lista_produtos.adicionar_produto(produto.model_dump())

@@ -12,6 +12,7 @@ uvicorn = "^0.25.0"
 taskipy = "^1.12.2"
 pytest = "^7.4.4"
 httpx = "^0.26.0"
+pydantic = "^2.5.3"
 
 
 [build-system]
@@ -21,5 +22,5 @@ build-backend = "poetry.core.masonry.api"
 [tool.taskipy.tasks]
 
 run = "uvicorn src.main:app --reload"
-test = "pytest -v tests.py"
+test = "pytest -v tests/tests.py"
 kill = "kill -9 $(lsof -t i:8000)"
