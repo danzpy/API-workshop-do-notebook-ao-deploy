@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
-from src.main import app
-from src.main import produtos
+from src.main import app, lista_produtos
+
 
 
 client = TestClient(app)
@@ -21,11 +21,7 @@ def test_listar_produtos_status_code():
 
 def test_listar_produtos_response():
     response = client.get('/produtos')
-    assert response.json() == produtos
-
-def test_buscar_produto_inexistente():
-    response = client.get('/produtos/9999')
-    assert response.json() == {'Status': 404, 'Mensagem': 'Produto não encontrado'}
+    assert response.json() == lista_produtos.listar_produtos()
 
 def test_buscar_produto_existente():
     response = client.get('/produtos/1')
@@ -35,3 +31,11 @@ def test_buscar_produto_existente():
         'descricao': 'Apple iPhone 14 128GB Meia-Noite 5G Tela 6,1" Câm. Traseira 12+12MP Frontal 12MP',
         'preco': 4699.00,
     }
+
+def test_buscar_produto_inexistente():
+    response = client.get('/produtos/999')
+    
+    assert response.status_code == 404
+    
+    assert response.json() == {'Status': 404, 'Mensagem': 'Produto não encontrado'}
+
