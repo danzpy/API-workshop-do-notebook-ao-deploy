@@ -2,6 +2,7 @@ from .data import Produtos
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from .schema import ProdutosSchema
+from typing import List
 
 
 # Criando instâncias
@@ -14,7 +15,7 @@ lista_produtos = Produtos()
 def bem_vindo(): # Response
     return {'Seja': 'Bem-vindo'}
 
-@app.get('/produtos', response_model=list[ProdutosSchema]) # Request
+@app.get('/produtos', response_model=List[ProdutosSchema]) # Request
 def listar_produtos():
     return lista_produtos.listar_produtos()
 
