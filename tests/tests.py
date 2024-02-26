@@ -4,9 +4,10 @@ from pydantic import ValidationError
 from src.schema import ProdutosSchema
 import pytest
 
+"""
 client = TestClient(app)
 
-"""
+
 Os testes abaixo foram comentados para que não ocorram problemas durante o CI.
 Estes problemas se deram devido às variáveis de ambiente.
 
