@@ -1,10 +1,11 @@
+"""
 from fastapi.testclient import TestClient
 from src.main import app
 from pydantic import ValidationError
 from src.schema import ProdutosSchema
 import pytest
 
-"""
+
 client = TestClient(app)
 
 
