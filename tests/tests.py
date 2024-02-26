@@ -1,11 +1,11 @@
-from fastapi.testclient import TestClient
-from src.main import app
-from pydantic import ValidationError
-from src.schema import ProdutosSchema
+#from fastapi.testclient import TestClient
+#from src.main import app
+#from pydantic import ValidationError
+#from src.schema import ProdutosSchema
 import pytest
 
 
-client = TestClient(app)
+#client = TestClient(app)
 
 def test_aleatorio():
 
